@@ -880,10 +880,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5137392496822250437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6818577a1f0b34cfa8f2ae4c4cbb1fd9, type: 3}
+  m_Script: {fileID: 11500000, guid: 51fb782a3f5cc44e49a3b66278ccaa43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 10
 --- !u!95 &5137392496822250441
 Animator:
   serializedVersion: 3

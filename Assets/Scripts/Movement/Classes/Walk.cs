@@ -3,16 +3,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Locomotion {
+public class Walk {
 
   private GameObject m_owner;
-  private float m_rotationSpeed;
+  private float rotationSpeed = 10f;
 
   // @ Constructor
-  public Locomotion (GameObject owner, float rotationSpeed)
+  public Walk (GameObject owner)
   {
     this.m_owner = owner;
-    this.m_rotationSpeed = rotationSpeed;
   }
 
   // @ Handle any locomotion input and assign it to the animator
@@ -25,7 +24,6 @@ public class Locomotion {
     Animator animator = m_owner.GetComponent<Animator>();
     animator.SetFloat(Constants.VERTICAL, vertical);
     animator.SetFloat(Constants.HORIZONTAL, horizontal);
-    animator.SetBool(Constants.IS_RUNNING, Input.GetButton(Constants.RUN));
 
     // @ Calculate desired rotation
     if (horizontal != 0f || vertical != 0f) {
@@ -39,15 +37,6 @@ public class Locomotion {
       // @ Update animator
       Animator animator = m_owner.GetComponent<Animator>();
       animator.SetFloat(Constants.VERTICAL, vertical);
-      animator.SetFloat(Constants.HORIZONTAL, horizontal);
-
-      // @ AI should run?
-      animator.SetBool(Constants.IS_RUNNING, isRunning);
-
-      // @ Calculate desired rotation
-      if (horizontal != 0f || vertical != 0f) {
-        m_owner.transform.rotation = GetDesiredRotation(vertical, horizontal);
-      }
   }
 
   // @ Return vertical input
@@ -67,7 +56,7 @@ public class Locomotion {
   {
     Vector3 targetDirection = new Vector3(-1 * horizontal, 0f, -1 * vertical);
     Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-    Quaternion desiredRotation = Quaternion.Lerp(m_owner.transform.rotation, targetRotation, m_rotationSpeed * Time.deltaTime);
+    Quaternion desiredRotation = Quaternion.Lerp(m_owner.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
     return desiredRotation;
   }

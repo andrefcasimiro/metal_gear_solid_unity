@@ -5,22 +5,20 @@ using System.Collections.Generic;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
-public class LocomotionController : MonoBehaviour {
+public class MovementController : MonoBehaviour {
 
-  public float rotationSpeed = 10f;
-
-  private Locomotion locomotion;
+  private Walk walk;
+  private Run run;
 
   private void Awake ()
   {
-    locomotion = new Locomotion(
-      this.gameObject,
-      rotationSpeed
-    );
+    walk = new Walk(this.gameObject);
+    run = new Run(this.gameObject);
   }
 
   private void Update ()
   {
-    locomotion.Listen();
+    walk.Listen();
+    run.Listen();
   }
 }
