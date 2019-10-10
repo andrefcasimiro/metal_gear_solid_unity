@@ -7,7 +7,6 @@ public class Locomotion {
 
   private GameObject m_owner;
   private float m_rotationSpeed;
-  private Quaternion cachedRotation;
 
   // @ Constructor
   public Locomotion (GameObject owner, float rotationSpeed)
@@ -26,19 +25,39 @@ public class Locomotion {
     Animator animator = m_owner.GetComponent<Animator>();
     animator.SetFloat(Constants.VERTICAL, vertical);
     animator.SetFloat(Constants.HORIZONTAL, horizontal);
+    animator.SetBool(Constants.IS_RUNNING, Input.GetButton(Constants.RUN));
 
     // @ Calculate desired rotation
-    m_owner.transform.rotation = GetDesiredRotation(vertical, horizontal);
+    if (horizontal != 0f || vertical != 0f) {
+      m_owner.transform.rotation = GetDesiredRotation(vertical, horizontal);
+    }
+  }
+
+  // @ AI Method
+  public void Move (float vertical, float horizontal, bool isRunning = false)
+  {
+      // @ Update animator
+      Animator animator = m_owner.GetComponent<Animator>();
+      animator.SetFloat(Constants.VERTICAL, vertical);
+      animator.SetFloat(Constants.HORIZONTAL, horizontal);
+
+      // @ AI should run?
+      animator.SetBool(Constants.IS_RUNNING, isRunning);
+
+      // @ Calculate desired rotation
+      if (horizontal != 0f || vertical != 0f) {
+        m_owner.transform.rotation = GetDesiredRotation(vertical, horizontal);
+      }
   }
 
   // @ Return vertical input
-  public float GetVerticalInput ()
+  private float GetVerticalInput ()
   {
     return Input.GetAxis(Constants.VERTICAL);
   }
 
   // @ Return horizontal input
-  public float GetHorizontalInput ()
+  private float GetHorizontalInput ()
   {
     return Input.GetAxis(Constants.HORIZONTAL);
   }
@@ -49,16 +68,6 @@ public class Locomotion {
     Vector3 targetDirection = new Vector3(-1 * horizontal, 0f, -1 * vertical);
     Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
     Quaternion desiredRotation = Quaternion.Lerp(m_owner.transform.rotation, targetRotation, m_rotationSpeed * Time.deltaTime);
-
-    // @ Stores last rotation and applies it to the idle state
-    if (horizontal != 0f || vertical != 0f)
-    {
-      cachedRotation = desiredRotation;
-    }
-    else
-    {
-      return cachedRotation;
-    }
 
     return desiredRotation;
   }

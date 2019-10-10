@@ -19,11 +19,6 @@ public class LocomotionController : MonoBehaviour {
     );
   }
 
-  private void Start ()
-  {
-
-  }
-
   private void Update ()
   {
     locomotion.Listen();

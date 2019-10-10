@@ -12,4 +12,8 @@ public class Constants : MonoBehaviour
   // Input
   public const string VERTICAL = "Vertical";
   public const string HORIZONTAL = "Horizontal";
+  public const string RUN = "Run";
+
+  // Animator Parameters
+  public const string IS_RUNNING = "IsRunning";
 }
