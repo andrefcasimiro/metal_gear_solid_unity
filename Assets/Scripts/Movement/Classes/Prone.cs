@@ -3,17 +3,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Crouch {
+public class Prone {
 
   private GameObject m_owner;
 
   private float defaultHeight;
   private Vector3 defaultCenter;
 
-  private bool isCrouched;
+  private bool isProned;
 
   // @ Constructor
-  public Crouch (GameObject owner)
+  public Prone (GameObject owner)
   {
     this.m_owner = owner;
     defaultHeight = owner.GetComponent<CapsuleCollider>().height;
@@ -25,23 +25,18 @@ public class Crouch {
     Animator animator = m_owner.GetComponent<Animator>();
     CapsuleCollider capsuleCollider = m_owner.GetComponent<CapsuleCollider>();
 
-    if (isCrouched)
+    if (isProned)
     {
-      capsuleCollider.height = defaultHeight / 2;
-      capsuleCollider.center = new Vector3 (defaultCenter.x, defaultCenter.y / 2, defaultCenter.z);
-    }
-    else
-    {
-      capsuleCollider.height = defaultHeight;
-      capsuleCollider.center = defaultCenter;
+      capsuleCollider.height = defaultHeight / 4;
+      capsuleCollider.center = new Vector3 (defaultCenter.x, defaultCenter.y / 4, defaultCenter.z);
     }
 
-    if (Input.GetButtonDown(Constants.CROUCH) && !animator.GetBool(Constants.IS_PRONING))
+    if (Input.GetButtonDown(Constants.PRONE) && animator.GetBool(Constants.IS_CROUCHING))
     {
-      isCrouched = !isCrouched;
+      isProned = !isProned;
     }
 
-    animator.SetBool(Constants.IS_CROUCHING, isCrouched);
+    animator.SetBool(Constants.IS_PRONING, isProned);
   }
 
   // @ AI Methods
@@ -49,13 +44,13 @@ public class Crouch {
   {
     Animator animator = m_owner.GetComponent<Animator>();
 
-    animator.SetBool(Constants.IS_CROUCHING, true);
+    animator.SetBool(Constants.IS_PRONING, true);
   }
 
   public void Stop ()
   {
     Animator animator = m_owner.GetComponent<Animator>();
 
-    animator.SetBool(Constants.IS_CROUCHING, false);
+    animator.SetBool(Constants.IS_PRONING, false);
   }
 }

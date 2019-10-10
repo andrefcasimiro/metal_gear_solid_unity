@@ -14,8 +14,10 @@ public class Constants : MonoBehaviour
   public const string HORIZONTAL = "Horizontal";
   public const string RUN = "Run";
   public const string CROUCH = "Crouch";
+  public const string PRONE = "Prone";
 
   // Animator Parameters
   public const string IS_RUNNING = "IsRunning";
   public const string IS_CROUCHING = "IsCrouching";
+  public const string IS_PRONING = "IsProning";
 }

@@ -10,12 +10,14 @@ public class MovementController : MonoBehaviour {
   private Walk walk;
   private Run run;
   private Crouch crouch;
+  private Prone prone;
 
   private void Awake ()
   {
     walk = new Walk(this.gameObject);
     run = new Run(this.gameObject);
     crouch = new Crouch(this.gameObject);
+    prone = new Prone(this.gameObject);
   }
 
   private void Update ()
@@ -23,5 +25,6 @@ public class MovementController : MonoBehaviour {
     walk.Listen();
     run.Listen();
     crouch.Listen();
+    prone.Listen();
   }
 }
