@@ -78,7 +78,6 @@ public class InventoryManager : MonoBehaviour {
           // @Is Item equipped already?
           if (equippedItem == item)
           {
-            Debug.Log("runn");
             equipmentManager.Unequip(item.slot);
             itemButton.GetComponent<EquippedBanner>().Hide();
           }

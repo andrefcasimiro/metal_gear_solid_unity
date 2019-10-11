@@ -9,6 +9,7 @@ public class Constants : MonoBehaviour
   public const string MAIN_CAMRA = "MainCamera";
   public const string GAME_CONTROLLER = "GameController";
   public const string FOOTSTEP_MANAGER = "FootstepManager";
+  public const string AUDIO_MANAGER = "AudioManager";
 
   // Input
   public const string VERTICAL = "Vertical";

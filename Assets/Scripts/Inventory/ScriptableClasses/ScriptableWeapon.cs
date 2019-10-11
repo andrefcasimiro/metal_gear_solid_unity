@@ -9,6 +9,7 @@ public class ScriptableWeapon : ScriptableItem {
   [Header("Stats")]
   public float damage = 10f;
   public float range = 35f;
+  public float fireRate = 10f;
 
   [Header("Ammunition")]
   public ScriptableBullet bullet;
@@ -19,15 +20,27 @@ public class ScriptableWeapon : ScriptableItem {
   public AudioClip emptySFX;
   public AudioClip reloadSFX;
 
-
   // @ Shoot Method
   public void Shoot (GameObject owner)
   {
+    AudioSource audioSource = owner.GetComponent<AudioSource>();
+
+    audioSource.clip = fireSFX;
+    audioSource.Play();
+
+    Debug.Log("Shot");
+
     RaycastHit hit;
 
-    if (Physics.Raycast(owner.transform.position, owner.transform.forward, out hit, range))
+    if (Physics.Raycast(
+      new Vector3(
+        owner.transform.position.x,
+        owner.transform.position.y + 1f,
+        owner.transform.position.z
+      ), owner.transform.forward, out hit, range))
     {
-      Debug.Log("Hit: " + hit);
+      GameObject target = hit.transform.gameObject;
+
     }
 
   }

@@ -24,8 +24,9 @@ MonoBehaviour:
   weaponType: 0
   damage: 10
   range: 35
+  fireRate: 0.15
   bullet: {fileID: 11400000, guid: 75e28628705454d9da1a370409b4e227, type: 2}
   magazineCapacity: 12
-  fireSFX: {fileID: 0}
+  fireSFX: {fileID: 8300000, guid: cc1b8fb14ccf94536b96110ab27b2209, type: 3}
   emptySFX: {fileID: 0}
   reloadSFX: {fileID: 0}
