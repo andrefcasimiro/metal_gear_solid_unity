@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bullet_Pistol
   m_EditorClassIdentifier: 
   name: New item
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 02aed6304b8624164b2d38f73515cc5d, type: 3}
   isDefault: 0
   type: 0

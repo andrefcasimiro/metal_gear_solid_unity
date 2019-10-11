@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b650725ed744dc9a2c199312a2a297, type: 3}
   m_Name: Pistol_M1911
   m_EditorClassIdentifier: 
-  name: New item
-  icon: {fileID: 0}
+  name: M1911
+  icon: {fileID: 21300000, guid: 1f4f9b4cad916405a870ca73a72dccc3, type: 3}
   isDefault: 0
   type: 0
-  slot: 0
+  slot: 1
   damage: 10
   range: 35
-  bullet: {fileID: 0}
+  bullet: {fileID: 11400000, guid: 75e28628705454d9da1a370409b4e227, type: 2}
   magazineCapacity: 12
   fireSFX: {fileID: 0}
   emptySFX: {fileID: 0}
   reloadSFX: {fileID: 0}
-  graphic: {fileID: 0}
+  graphic: {fileID: 3417228037889323081, guid: 6459faf89ff2949289976705803a167f, type: 3}

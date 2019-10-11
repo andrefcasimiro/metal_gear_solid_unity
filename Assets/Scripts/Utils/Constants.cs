@@ -16,6 +16,7 @@ public class Constants : MonoBehaviour
   public const string RUN = "Run";
   public const string CROUCH = "Crouch";
   public const string PRONE = "Prone";
+  public const string INVENTORY = "Inventory";
 
   // Animator Parameters
   public const string IS_RUNNING = "IsRunning";
@@ -24,5 +25,6 @@ public class Constants : MonoBehaviour
 
   // Footsteps
   public const string SNOW = "Snow";
+
 
 }

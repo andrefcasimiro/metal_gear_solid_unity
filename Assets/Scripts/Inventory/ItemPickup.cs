@@ -3,6 +3,7 @@ using UnityEngine;
 public class ItemPickup : MonoBehaviour {
 
   public ScriptableItem item;
+  public int quantity = 1;
 
   private void Update () {
     this.transform.Rotate(0, 100f * Time.deltaTime, 0);
@@ -14,8 +15,9 @@ public class ItemPickup : MonoBehaviour {
     if (inventoryManager != null)
     {
       // Add item to game object inventory
-      inventoryManager.inventory.Add(item);
-      Debug.Log(inventoryManager.inventory.ListAll());
+      for (int i = 0; i < quantity; i++) {
+        inventoryManager.inventory.Add(item);
+      }
     }
 
     Destroy(this.gameObject);
