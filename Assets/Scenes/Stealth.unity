@@ -121,6 +121,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &3796905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3796907}
+  - component: {fileID: 3796906}
+  m_Layer: 0
+  m_Name: FootstepManager
+  m_TagString: FootstepManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &3796906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3796905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b0abb813bf9485ca136c5fab06da74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footsteps:
+  - key: Snow
+    clips:
+    - {fileID: 8300000, guid: 06c956466747e764aa6d69fbee1b0935, type: 3}
+    - {fileID: 8300000, guid: 28864cb8aba39f742b2e52c3a5a4b113, type: 3}
+    - {fileID: 8300000, guid: 69ce65de178f68c409ed53debc0c8148, type: 3}
+    - {fileID: 8300000, guid: 152baa2c7a679d547883e6585674da7a, type: 3}
+    - {fileID: 8300000, guid: c4ef324bf90bc9b45878c7e5acf7e4a5, type: 3}
+    - {fileID: 8300000, guid: 4477d53a3a60ea643b87fe82504aee67, type: 3}
+    - {fileID: 8300000, guid: 706fe9682ff24844e9b6f71d56f9b9e1, type: 3}
+    - {fileID: 8300000, guid: 2227cea3c6513a8418c2e66b6e823f6f, type: 3}
+    layer:
+      serializedVersion: 2
+      m_Bits: 256
+--- !u!4 &3796907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3796905}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.7786293, y: -1.2342751, z: -26.309933}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &153601702
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +301,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806884750}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &908374998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7140903771075057580, guid: ba708825c42db46edadd560d4ac834cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 9035783736961833556}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &947880063
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +804,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31a1b9db086ae43c0b15473b003d5307, type: 3}
+--- !u!4 &1804392548 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2572702774926816852, guid: ba708825c42db46edadd560d4ac834cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 9035783736961833556}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1913549555
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,6 +971,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5137392496822250442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5137392496822250437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96feaccfa5b31426e994c54f0bcb06fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftFoot: {fileID: 1804392548}
+  rightFoot: {fileID: 908374998}
+  footstepDetector: {fileID: 2439851702558760340, guid: 02fbf1e2de0934651856e8dcabf49275,
+    type: 3}
 --- !u!4 &8147282864301283798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 897759998154802050, guid: ba708825c42db46edadd560d4ac834cb,
