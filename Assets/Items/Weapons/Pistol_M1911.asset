@@ -15,8 +15,13 @@ MonoBehaviour:
   name: M1911
   icon: {fileID: 21300000, guid: 1f4f9b4cad916405a870ca73a72dccc3, type: 3}
   isDefault: 0
-  type: 0
+  itemType: 0
   slot: 1
+  graphic: {fileID: 3417228037889323081, guid: 6459faf89ff2949289976705803a167f, type: 3}
+  instantiatedPosition: {x: 0.095, y: -0.026, z: -0.027}
+  instantiatedRotation: {x: -7.033, y: 96.71201, z: 91.69801, w: 0}
+  instantiatedScale: {x: 0.28695, y: 0.28695, z: 0.28695}
+  weaponType: 0
   damage: 10
   range: 35
   bullet: {fileID: 11400000, guid: 75e28628705454d9da1a370409b4e227, type: 2}
@@ -24,4 +29,3 @@ MonoBehaviour:
   fireSFX: {fileID: 0}
   emptySFX: {fileID: 0}
   reloadSFX: {fileID: 0}
-  graphic: {fileID: 3417228037889323081, guid: 6459faf89ff2949289976705803a167f, type: 3}

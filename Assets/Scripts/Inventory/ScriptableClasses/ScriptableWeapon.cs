@@ -4,10 +4,7 @@ using UnityEngine;
 public class ScriptableWeapon : ScriptableItem {
 
   [Header("Type")]
-  public WeaponType type;
-
-  [Header("Slot")]
-  public WeaponSlot slot;
+  public WeaponType weaponType;
 
   [Header("Stats")]
   public float damage = 10f;
@@ -22,11 +19,18 @@ public class ScriptableWeapon : ScriptableItem {
   public AudioClip emptySFX;
   public AudioClip reloadSFX;
 
-  [Header("Graphic")]
-  public GameObject graphic;
 
+  // @ Shoot Method
+  public void Shoot (GameObject owner)
+  {
+    RaycastHit hit;
+
+    if (Physics.Raycast(owner.transform.position, owner.transform.forward, out hit, range))
+    {
+      Debug.Log("Hit: " + hit);
+    }
+
+  }
 }
 
 public enum WeaponType { Pistol, Rifle, Sniper, Shotgun, Missile_Launcher, Melee }
-
-public enum WeaponSlot { Left_Hand, Right_Hand }

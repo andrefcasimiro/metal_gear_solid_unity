@@ -13,6 +13,8 @@ public class InventoryManager : MonoBehaviour {
   [HideInInspector]
   public Inventory inventory;
 
+  private EquipmentManager equipmentManager;
+
   private bool isActive = false;
 
   private void Awake ()
@@ -21,6 +23,11 @@ public class InventoryManager : MonoBehaviour {
 
     // Don't show inventory ui on awake
     inventoryUI.SetActive(false);
+  }
+
+  private void Start ()
+  {
+    equipmentManager = GetComponent<EquipmentManager>();
   }
 
   private void Update ()
@@ -55,8 +62,35 @@ public class InventoryManager : MonoBehaviour {
       GameObject itemButton = Instantiate(itemButtonPrefab);
       itemButton.transform.GetChild(0).GetComponent<Image>().sprite = item.icon;
       itemButton.transform.SetParent(panel.transform);
-    }
-  }
 
+      // @ Equippable Item
+      if (item.slot != null && item.graphic != null)
+      {
+        // @ If item is already equipped, show Equipped banner
+        ScriptableItem equippedItem = equipmentManager.GetEquippedItem(item.slot);
+
+        if (equippedItem == item)
+        {
+          itemButton.GetComponent<EquippedBanner>().Display();
+        }
+
+        itemButton.GetComponent<Button>().onClick.AddListener(() => {
+          // @Is Item equipped already?
+          if (equippedItem == item)
+          {
+            Debug.Log("runn");
+            equipmentManager.Unequip(item.slot);
+            itemButton.GetComponent<EquippedBanner>().Hide();
+          }
+          else
+          {
+            equipmentManager.Equip(item.slot, item);
+            itemButton.GetComponent<EquippedBanner>().Display();
+          }
+        });
+      }
+    }
+
+    }
 
 }
