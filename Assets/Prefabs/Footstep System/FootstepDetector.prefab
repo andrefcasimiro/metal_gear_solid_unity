@@ -112,7 +112,7 @@ MonoBehaviour:
       m_Calls: []
   layers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
 --- !u!82 &-2664930959127952583
 AudioSource:
   m_ObjectHideFlags: 0
