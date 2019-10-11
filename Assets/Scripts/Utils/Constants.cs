@@ -24,6 +24,7 @@ public class Constants : MonoBehaviour
   public const string IS_RUNNING = "IsRunning";
   public const string IS_CROUCHING = "IsCrouching";
   public const string IS_PRONING = "IsProning";
+  public const string WEAPON_ID = "Weapon_ID";
 
   // Footsteps
   public const string SNOW = "Snow";

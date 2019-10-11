@@ -11,8 +11,8 @@ public class EquipmentManager : MonoBehaviour {
 
   void Awake ()
   {
-    leftHandEquipmentSlot = new EquipmentSlot(EquipmentSlotType.Left_Hand, leftHand);
-    rightHandEquipmentSlot = new EquipmentSlot(EquipmentSlotType.Right_Hand, rightHand);
+    leftHandEquipmentSlot = new EquipmentSlot(EquipmentSlotType.Left_Hand, leftHand, this.gameObject);
+    rightHandEquipmentSlot = new EquipmentSlot(EquipmentSlotType.Right_Hand, rightHand, this.gameObject);
   }
 
   public void Equip (EquipmentSlotType slotType, ScriptableItem itemToEquip)

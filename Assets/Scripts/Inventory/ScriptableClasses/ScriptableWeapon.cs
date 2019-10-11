@@ -28,8 +28,6 @@ public class ScriptableWeapon : ScriptableItem {
     audioSource.clip = fireSFX;
     audioSource.Play();
 
-    Debug.Log("Shot");
-
     RaycastHit hit;
 
     if (Physics.Raycast(
@@ -46,4 +44,4 @@ public class ScriptableWeapon : ScriptableItem {
   }
 }
 
-public enum WeaponType { Pistol, Rifle, Sniper, Shotgun, Missile_Launcher, Melee }
+public enum WeaponType { None, Pistol, Rifle, Sniper, Shotgun, Missile_Launcher, Melee }

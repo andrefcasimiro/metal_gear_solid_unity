@@ -8,14 +8,17 @@ public class EquipmentSlot {
   private EquipmentSlotType m_slot;
   // @ The equipment slot bone target of the owner
   private Transform m_boneReference;
+  // @ The owner of the equipment
+  private GameObject m_owner;
 
   private ScriptableItem equippedItem = null;
   private GameObject equippedItemGameObject = null;
 
-  public EquipmentSlot (EquipmentSlotType slot, Transform boneReference)
+  public EquipmentSlot (EquipmentSlotType slot, Transform boneReference, GameObject owner)
   {
     this.m_slot = slot;
     this.m_boneReference = boneReference;
+    this.m_owner = owner;
   }
 
   public void Equip (ScriptableItem itemToEquip)
@@ -36,10 +39,25 @@ public class EquipmentSlot {
     equippedItemGameObject.transform.localScale = itemToEquip.instantiatedScale;
 
     equippedItem = itemToEquip;
+
+    // @ If equipment is a weapon, update Weapon_ID parameter
+    ScriptableWeapon weapon = (ScriptableWeapon)equippedItem;
+    if (weapon != null && weapon.weaponType != null)
+    {
+      m_owner.GetComponent<Animator>().SetInteger(Constants.WEAPON_ID, (int)weapon.weaponType);
+    }
   }
+
 
   public void Unequip ()
   {
+    // @ If equipment to unequip is a weapon, update Weapon_ID parameter
+    ScriptableWeapon weapon = (ScriptableWeapon)equippedItem;
+    if (weapon != null)
+    {
+      m_owner.GetComponent<Animator>().SetInteger(Constants.WEAPON_ID, 0);
+    }
+
     equippedItem = null;
     GameObject.Destroy(equippedItemGameObject);
   }
