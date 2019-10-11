@@ -40,6 +40,12 @@ public class InventoryManager : MonoBehaviour {
       if (isActive)
       {
         Draw();
+        Time.timeScale = 0f;
+      }
+      else
+      {
+        // @ For now leave it here, but have a global handler for this
+        Time.timeScale = 1f;
       }
     }
   }
@@ -86,6 +92,8 @@ public class InventoryManager : MonoBehaviour {
             equipmentManager.Equip(item.slot, item);
             itemButton.GetComponent<EquippedBanner>().Display();
           }
+
+          Draw();
         });
       }
     }

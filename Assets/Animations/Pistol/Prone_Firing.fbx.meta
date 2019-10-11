@@ -1,14 +1,11 @@
 fileFormatVersion: 2
-guid: 748a0fb1388df4535bcc61485bfa2a04
+guid: 917e595f251894676b7583948d77cc75
 ModelImporter:
   serializedVersion: 29
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
-  - first:
-      74: 264127814558352762
-    second: Prone Forward
+    second: Prone Rifle Fire
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -38,14 +35,14 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Prone Forward
+      name: Prone Rifle Fire
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 91
+      lastFrame: 26
       wrapMode: 0
       orientationOffsetY: 0
-      level: -0.1
+      level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
