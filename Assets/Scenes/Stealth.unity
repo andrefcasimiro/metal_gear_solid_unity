@@ -303,9 +303,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 153601703}
+  - component: {fileID: 153601704}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -324,6 +325,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &153601704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153601702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f397d159cddf43188c647f0cc80aed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &573660602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8508918278927758682, guid: ba708825c42db46edadd560d4ac834cb,
@@ -1257,18 +1270,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -7962933796245747656, guid: 31a1b9db086ae43c0b15473b003d5307,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 4991655869066706035, guid: 31a1b9db086ae43c0b15473b003d5307,
-        type: 3}
-    - target: {fileID: -4732744574420939668, guid: 31a1b9db086ae43c0b15473b003d5307,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 4452280977002723392, guid: 31a1b9db086ae43c0b15473b003d5307,
-        type: 3}
     - target: {fileID: -4216859302048453862, guid: 31a1b9db086ae43c0b15473b003d5307,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1324,6 +1325,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7962933796245747656, guid: 31a1b9db086ae43c0b15473b003d5307,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 4991655869066706035, guid: 31a1b9db086ae43c0b15473b003d5307,
+        type: 3}
+    - target: {fileID: -4732744574420939668, guid: 31a1b9db086ae43c0b15473b003d5307,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 4452280977002723392, guid: 31a1b9db086ae43c0b15473b003d5307,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31a1b9db086ae43c0b15473b003d5307, type: 3}
 --- !u!4 &1804392548 stripped

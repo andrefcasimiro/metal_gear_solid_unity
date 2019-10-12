@@ -3,7 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(EquipmentManager))]
 public class WeaponManager : MonoBehaviour {
 
-  EquipmentManager equipmentManager;
+  private EquipmentManager equipmentManager;
+  private GameController gameController;
 
   private ScriptableWeapon leftHandWeapon;
   private ScriptableWeapon rightHandWeapon;
@@ -13,18 +14,19 @@ public class WeaponManager : MonoBehaviour {
   private void Start ()
   {
     equipmentManager = GetComponent<EquipmentManager>();
+    gameController = GameObject.FindWithTag(Constants.GAME_CONTROLLER).GetComponent<GameController>();
   }
 
   private void Update ()
   {
-    if (timer != null)
-    {
-      timer.Increment();
-    }
 
+    HandleTimer();
+
+    // Try firing
     if (Input.GetButton(Constants.FIRE))
     {
-      if (timer != null && !timer.HasFinished())
+      // If we have a timer and it hasn't finished yet, we shouldn't be able to shoot the weapon
+      if (timer != null && !timer.HasFinished() || gameController.IsPaused())
       {
         return;
       }
@@ -49,6 +51,21 @@ public class WeaponManager : MonoBehaviour {
         timer = new Timer(rightHandWeapon.fireRate);
       }
 
+    }
+  }
+
+  private void HandleTimer ()
+  {
+    // If we have an active timer running, increment it
+    if (timer != null)
+    {
+      timer.Increment();
+    }
+
+    // Timer has ended, we don't need it anymore
+    if (timer != null && timer.HasFinished())
+    {
+      timer = null;
     }
   }
 

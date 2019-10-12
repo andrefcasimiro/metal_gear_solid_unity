@@ -12,6 +12,8 @@ public class MovementController : MonoBehaviour {
   private Crouch crouch;
   private Prone prone;
 
+  private GameController gameController;
+
   private void Awake ()
   {
     walk = new Walk(this.gameObject);
@@ -20,8 +22,18 @@ public class MovementController : MonoBehaviour {
     prone = new Prone(this.gameObject);
   }
 
+  private void Start ()
+  {
+    gameController = GameObject.FindWithTag(Constants.GAME_CONTROLLER).GetComponent<GameController>();
+  }
+
   private void Update ()
   {
+    if (gameController.IsPaused())
+    {
+      return;
+    }
+
     walk.Listen();
     run.Listen();
     crouch.Listen();

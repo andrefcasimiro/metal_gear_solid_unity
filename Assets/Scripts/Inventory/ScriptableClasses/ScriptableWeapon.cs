@@ -23,11 +23,6 @@ public class ScriptableWeapon : ScriptableItem {
   // @ Shoot Method
   public void Shoot (GameObject owner)
   {
-    // If game is paused, don't allo shooting
-    if (Time.timeScale == 0f) {
-      return;
-    }
-
     AudioSource audioSource = owner.GetComponent<AudioSource>();
 
     audioSource.clip = fireSFX;

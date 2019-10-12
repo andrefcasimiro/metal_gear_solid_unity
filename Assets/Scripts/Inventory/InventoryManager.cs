@@ -13,8 +13,8 @@ public class InventoryManager : MonoBehaviour {
   [HideInInspector]
   public Inventory inventory;
 
+  private GameController gameController;
   private EquipmentManager equipmentManager;
-
   private bool isActive = false;
 
   private void Awake ()
@@ -28,6 +28,7 @@ public class InventoryManager : MonoBehaviour {
   private void Start ()
   {
     equipmentManager = GetComponent<EquipmentManager>();
+    gameController = GameObject.FindWithTag(Constants.GAME_CONTROLLER).GetComponent<GameController>();
   }
 
   private void Update ()
@@ -40,12 +41,11 @@ public class InventoryManager : MonoBehaviour {
       if (isActive)
       {
         Draw();
-        Time.timeScale = 0f;
+        gameController.Pause();
       }
       else
       {
-        // @ For now leave it here, but have a global handler for this
-        Time.timeScale = 1f;
+        gameController.Resume();
       }
     }
   }
@@ -81,6 +81,7 @@ public class InventoryManager : MonoBehaviour {
         }
 
         itemButton.GetComponent<Button>().onClick.AddListener(() => {
+
           // @Is Item equipped already?
           if (equippedItem == item)
           {
@@ -97,7 +98,6 @@ public class InventoryManager : MonoBehaviour {
         });
       }
     }
-
-    }
+  }
 
 }
