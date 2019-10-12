@@ -26,6 +26,9 @@ public class EquipmentManager : MonoBehaviour {
     {
       rightHandEquipmentSlot.Equip(itemToEquip);
     }
+
+    // Animator Updates
+    GetComponent<Animator>().SetBool(Constants.IS_DUAL_WIELDING, IsDualWielding());
   }
 
   public void Unequip (EquipmentSlotType slotType)
@@ -39,6 +42,9 @@ public class EquipmentManager : MonoBehaviour {
     {
       rightHandEquipmentSlot.Unequip();
     }
+
+    // Animator Updates
+    GetComponent<Animator>().SetBool(Constants.IS_DUAL_WIELDING, IsDualWielding());
   }
 
   public ScriptableItem GetEquippedItem (EquipmentSlotType slotType) {
@@ -55,10 +61,33 @@ public class EquipmentManager : MonoBehaviour {
     return null;
   }
 
+  public GameObject GetEquippedItemGameObject (EquipmentSlotType slotType) {
+    if (IsLeftHand(slotType))
+    {
+      return leftHandEquipmentSlot.GetEquippedItemGameObject();
+    }
+
+    if (IsRightHand(slotType))
+    {
+      return rightHandEquipmentSlot.GetEquippedItemGameObject();
+    }
+
+    return null;
+  }
+
   private bool IsLeftHand (EquipmentSlotType slotType) {
     return slotType.ToString() == Constants.LEFT_HAND;
   }
   private bool IsRightHand (EquipmentSlotType slotType) {
     return slotType.ToString() == Constants.RIGHT_HAND;
+  }
+
+  private bool IsDualWielding ()
+  {
+    return (
+      GetEquippedItem(EquipmentSlotType.Right_Hand) != null
+      && GetEquippedItem(EquipmentSlotType.Left_Hand) != null
+    );
+
   }
 }

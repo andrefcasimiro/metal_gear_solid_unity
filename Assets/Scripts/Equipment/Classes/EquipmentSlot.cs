@@ -55,7 +55,13 @@ public class EquipmentSlot {
     ScriptableWeapon weapon = (ScriptableWeapon)equippedItem;
     if (weapon != null)
     {
-      m_owner.GetComponent<Animator>().SetInteger(Constants.WEAPON_ID, 0);
+      // We should guarantee that both hands dont have a weapon equipped before doing this:
+      // If we unequip a pistol and have a pistol on the other hand, we will run into issues.
+      Animator animator = m_owner.GetComponent<Animator>();
+
+      if (!animator.GetBool(Constants.IS_DUAL_WIELDING)) {
+        animator.SetInteger(Constants.WEAPON_ID, 0);
+      }
     }
 
     equippedItem = null;
@@ -65,6 +71,11 @@ public class EquipmentSlot {
   public ScriptableItem GetEquippedItem ()
   {
     return equippedItem;
+  }
+
+  public GameObject GetEquippedItemGameObject ()
+  {
+    return equippedItemGameObject;
   }
 
 }

@@ -18,8 +18,8 @@ MonoBehaviour:
   itemType: 1
   slot: 0
   graphic: {fileID: 3417228037889323081, guid: 6459faf89ff2949289976705803a167f, type: 3}
-  instantiatedPosition: {x: 0.095, y: -0.026, z: -0.027}
-  instantiatedRotation: {x: -7.033, y: 96.71201, z: 91.69801, w: 0}
+  instantiatedPosition: {x: -0.103, y: -0.016, z: -0.019}
+  instantiatedRotation: {x: 12.279, y: -83.63, z: -117.66, w: 0}
   instantiatedScale: {x: 0.28695, y: 0.28695, z: 0.28695}
   weaponType: 1
   damage: 10

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FootstepManager
   - AudioManager
+  - Muzzleflash
   layers:
   - Default
   - TransparentFX

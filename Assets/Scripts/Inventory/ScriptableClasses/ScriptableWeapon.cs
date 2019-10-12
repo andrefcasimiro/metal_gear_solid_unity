@@ -31,8 +31,21 @@ public class ScriptableWeapon : ScriptableItem {
     // Play Firing Animation
     owner.GetComponent<Animator>().SetTrigger(Constants.SHOOT);
 
-    RaycastHit hit;
+    // We need to obtain the instance of the gun graphic
+    GameObject weaponGraphic = owner.GetComponent<EquipmentManager>().GetEquippedItemGameObject(this.slot);
 
+    // Play muzzleflash fx if it exists
+    foreach (Transform child in weaponGraphic.transform)
+    {
+      if (child.gameObject.tag == Constants.MUZZLEFLASH)
+      {
+        ParticleSystem particle = child.gameObject.GetComponent<ParticleSystem>();
+        particle.Clear();
+        particle.Play();
+      }
+    }
+
+    RaycastHit hit;
     if (Physics.Raycast(
       new Vector3(
         owner.transform.position.x,

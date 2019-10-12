@@ -10,6 +10,7 @@ public class Constants : MonoBehaviour
   public const string GAME_CONTROLLER = "GameController";
   public const string FOOTSTEP_MANAGER = "FootstepManager";
   public const string AUDIO_MANAGER = "AudioManager";
+  public const string MUZZLEFLASH = "Muzzleflash";
 
   // Input
   public const string VERTICAL = "Vertical";
@@ -26,6 +27,7 @@ public class Constants : MonoBehaviour
   public const string IS_PRONING = "IsProning";
   public const string WEAPON_ID = "Weapon_ID";
   public const string SHOOT = "Shoot";
+  public const string IS_DUAL_WIELDING = "IsDualWielding";
 
   // Footsteps
   public const string SNOW = "Snow";
