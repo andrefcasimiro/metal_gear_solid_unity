@@ -45,7 +45,7 @@ public class WeaponManager : MonoBehaviour {
     {
       foreach (Weapon weapon in weapons)
       {
-        //weapon.Reload();
+        weapon.Reload();
       }
     }
 

@@ -30,4 +30,5 @@ MonoBehaviour:
   magazineCapacity: 12
   fireSFX: {fileID: 8300000, guid: cc1b8fb14ccf94536b96110ab27b2209, type: 3}
   emptySFX: {fileID: 8300000, guid: ceec860e2e7704b5698344a7ebd96575, type: 3}
-  reloadSFX: {fileID: 0}
+  reloadSFX: {fileID: 8300000, guid: 8299cb3c65004455e95923931e58d169, type: 3}
+  autoReload: 0

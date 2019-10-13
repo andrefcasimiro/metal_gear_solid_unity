@@ -18,6 +18,9 @@ public class Weapon : MonoBehaviour
 
   private float characterHeight = 1f;
 
+  private int bulletsFired;
+  private bool hasReloadedOnce;
+
   // @Constructor
   public Weapon (GameObject owner, ScriptableWeapon scriptableWeapon, GameObject weaponGameObject)
   {
@@ -41,7 +44,12 @@ public class Weapon : MonoBehaviour
     // @ Initialize fire rate timer
     fireRateTimer = new Timer(m_scriptableWeapon.fireRate);
 
-    if (!HasEnoughBullets())
+    // @ Magazine is empty. We need to reload.
+    if (
+      !hasReloadedOnce
+      || bulletsFired >= m_scriptableWeapon.magazineCapacity
+      || (GetBulletsAmount() + (m_scriptableWeapon.magazineCapacity - bulletsFired) <= 0) // Total bullets plus the ones we have in the magazine
+     )
     {
       DryShoot();
       return;
@@ -50,6 +58,8 @@ public class Weapon : MonoBehaviour
     FireBullet();
 
     DispatchRaycast();
+
+    CalculateAmmunition();
   }
 
   // @ Sub Methods
@@ -62,9 +72,6 @@ public class Weapon : MonoBehaviour
 
   private void FireBullet ()
   {
-    // @ Remove 1 bullet from inventory
-    inventory.Remove(m_scriptableWeapon.bullet);
-
     // @ Play shooting sfx
     audioSource.clip = m_scriptableWeapon.fireSFX;
     audioSource.Play();
@@ -103,6 +110,51 @@ public class Weapon : MonoBehaviour
     }
   }
 
+  private void CalculateAmmunition ()
+  {
+    if (bulletsFired < m_scriptableWeapon.magazineCapacity)
+    {
+      bulletsFired++;
+    }
+  }
+
+  public void Reload ()
+  {
+    int bulletsAmount = GetBulletsAmount();
+
+    // @ No magazines remaining for reload
+    if (bulletsAmount <= 0)
+    {
+      // @ Play reload sfx
+      audioSource.clip = m_scriptableWeapon.emptySFX;
+      audioSource.Play();
+
+      return;
+    }
+
+    int amountToRemove = !hasReloadedOnce
+      ? m_scriptableWeapon.magazineCapacity
+      : bulletsFired;
+
+    // @ Reload and preserve any unfired bullets
+    for (int i = 0; i < amountToRemove; i++)
+    {
+      inventory.Remove(m_scriptableWeapon.bullet);
+    }
+
+    int bulletsInTheChamber = m_scriptableWeapon.magazineCapacity - bulletsFired;
+
+    bulletsFired = bulletsAmount + bulletsInTheChamber >= m_scriptableWeapon.magazineCapacity
+      ? 0
+      : bulletsAmount + bulletsInTheChamber;
+
+    hasReloadedOnce = true;
+
+    // @ Play reload sfx
+    audioSource.clip = m_scriptableWeapon.reloadSFX;
+    audioSource.Play();
+  }
+
   // @ UI
 
   public void DrawAmmunitionCounter ()
@@ -118,7 +170,13 @@ public class Weapon : MonoBehaviour
       }
     }
 
-    bulletCounterText.text = "0/0";
+    int magazineCapacity = m_scriptableWeapon.magazineCapacity;
+    int bulletsAmount = GetBulletsAmount();
+
+    int current = hasReloadedOnce ? magazineCapacity - bulletsFired : 0;
+    int total = bulletsAmount + magazineCapacity >= magazineCapacity ? (bulletsAmount) : 0;
+
+    bulletCounterText.text = current + "/" + total;
   }
 
   public void UpdateFireRateTimer ()
@@ -139,11 +197,9 @@ public class Weapon : MonoBehaviour
   }
 
   // @ Helpers
-  private bool HasEnoughBullets ()
+  private int GetBulletsAmount ()
   {
-    int totalBullets = inventory.GetQuantity(m_scriptableWeapon.bullet);
-
-    return totalBullets >= 0;
+    return inventory.GetQuantity(m_scriptableWeapon.bullet);
   }
 
   private bool CanShoot ()
