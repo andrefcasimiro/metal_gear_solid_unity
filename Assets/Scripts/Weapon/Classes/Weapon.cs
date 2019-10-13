@@ -144,9 +144,14 @@ public class Weapon : MonoBehaviour
 
     int bulletsInTheChamber = m_scriptableWeapon.magazineCapacity - bulletsFired;
 
+    Debug.Log("bullets_amount: " + bulletsAmount + " is bigger than " + m_scriptableWeapon.magazineCapacity + "?");
+    Debug.Log(bulletsAmount >= m_scriptableWeapon.magazineCapacity);
+
+    Debug.Log("Then, the bullets fired should start at: " + (bulletsInTheChamber + bulletsAmount));
+
     bulletsFired = bulletsAmount + bulletsInTheChamber >= m_scriptableWeapon.magazineCapacity
       ? 0
-      : bulletsAmount + bulletsInTheChamber;
+      : m_scriptableWeapon.magazineCapacity - bulletsInTheChamber - bulletsAmount;
 
     hasReloadedOnce = true;
 
