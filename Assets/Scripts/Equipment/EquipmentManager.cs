@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class Slot {
   public EquipmentSlotType type;
@@ -21,6 +22,9 @@ public class EquipmentManager : MonoBehaviour {
 
   private readonly List<Slot> slots = new List<Slot>();
 
+  // @Events
+  public UnityEvent EquipEvent;
+  public UnityEvent UnequipEvent;
 
   void Awake ()
   {
@@ -39,8 +43,11 @@ public class EquipmentManager : MonoBehaviour {
   {
     GetSlot(slotType).equipmentSlot.Equip(itemToEquip);
     
-    // Animator Updates
+    // @ Animator Updates
     GetComponent<Animator>().SetBool(Constants.IS_DUAL_WIELDING, IsDualWielding());
+
+    // @ Notify subscribed scripts
+    EquipEvent.Invoke();
   }
 
   public void Unequip (EquipmentSlotType slotType)
@@ -49,8 +56,11 @@ public class EquipmentManager : MonoBehaviour {
 
     slot.Unequip();
   
-    // Animator Updates
+    // @ Animator Updates
     GetComponent<Animator>().SetBool(Constants.IS_DUAL_WIELDING, IsDualWielding());
+
+    // @ Notify subscribed scripts
+    UnequipEvent.Invoke();
   }
 
   public ScriptableItem GetEquippedItem (EquipmentSlotType slotType) {

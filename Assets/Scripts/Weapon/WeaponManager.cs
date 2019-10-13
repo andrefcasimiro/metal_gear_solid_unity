@@ -1,19 +1,5 @@
 using UnityEngine;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-
-[System.Serializable]
-public class WeaponTimer {
-  public EquipmentSlotType equipmentSlot;
-  public Timer timer;
-
-  public WeaponTimer (EquipmentSlotType _equipmentSlot, Timer _timer)
-  {
-    this.equipmentSlot = _equipmentSlot;
-    this.timer = _timer;
-  }
-}
 
 [RequireComponent(typeof(EquipmentManager))]
 public class WeaponManager : MonoBehaviour {
@@ -21,32 +7,47 @@ public class WeaponManager : MonoBehaviour {
   private EquipmentManager equipmentManager;
   private GameController gameController;
 
-  private ScriptableWeapon leftHandWeapon;
-  private ScriptableWeapon rightHandWeapon;
-
-  // If we want dual wielding, we should make timer a list so we don't override timers between weapons
-  private List<WeaponTimer> weaponTimers = new List<WeaponTimer>();
-
-  private GameObject bulletCountUI;
+  // @ Equipped weapons
+  private List<Weapon> weapons = new List<Weapon>();
 
   private void Start ()
   {
     equipmentManager = GetComponent<EquipmentManager>();
     gameController = GameObject.FindWithTag(Constants.GAME_CONTROLLER).GetComponent<GameController>();
-    bulletCountUI = GameObject.FindWithTag(Constants.UI_BULLET_COUNT);
+
+    // @Event Subscription
+    equipmentManager.EquipEvent.AddListener(UpdateWeaponsList);
+    equipmentManager.UnequipEvent.AddListener(UpdateWeaponsList);
+  }
+
+  private void UpdateWeaponsList()
+  {
+    weapons.Clear();
+
+    //@ Left hand slot
+    AddWeaponIfExists(EquipmentSlotType.Left_Hand);
+
+    //@ Right hand slot
+    AddWeaponIfExists(EquipmentSlotType.Right_Hand);
   }
 
   private void Update ()
   {
+    foreach (Weapon weapon in weapons)
+    {
+      weapon.DrawAmmunitionCounter();
+      weapon.UpdateFireRateTimer();
+    }
 
-    HandleTimers();
 
-    // @Any weapons equipped?
-    leftHandWeapon = (ScriptableWeapon)equipmentManager.GetEquippedItem(EquipmentSlotType.Left_Hand);
-    rightHandWeapon = (ScriptableWeapon)equipmentManager.GetEquippedItem(EquipmentSlotType.Right_Hand);
-
-    leftHandWeapon?.DrawBulletCount(this.gameObject);
-    rightHandWeapon?.DrawBulletCount(this.gameObject);
+    // Try reloading
+    if (Input.GetButtonDown(Constants.RELOAD))
+    {
+      foreach (Weapon weapon in weapons)
+      {
+        //weapon.Reload();
+      }
+    }
 
     // Try firing
     if (Input.GetButton(Constants.FIRE))
@@ -56,71 +57,24 @@ public class WeaponManager : MonoBehaviour {
         return;
       }
 
-      // Left Hand Weapon Handler
-      if (leftHandWeapon != null && CanShoot(EquipmentSlotType.Left_Hand))
+      foreach (Weapon weapon in weapons)
       {
-        leftHandWeapon.Shoot(this.gameObject, bulletCountUI);
-
-        Timer timer = new Timer(leftHandWeapon.fireRate);
-        WeaponTimer weaponTimer = new WeaponTimer(EquipmentSlotType.Left_Hand, timer);
-        weaponTimers.Add(weaponTimer);
+        weapon.Shoot();
       }
-
-      // Right Hand Weapon Handler
-      if (rightHandWeapon != null && CanShoot(EquipmentSlotType.Right_Hand))
-      {
-        rightHandWeapon.Shoot(this.gameObject, bulletCountUI);
-
-        Timer timer = new Timer(rightHandWeapon.fireRate);
-        WeaponTimer weaponTimer = new WeaponTimer(EquipmentSlotType.Right_Hand, timer);
-        weaponTimers.Add(weaponTimer);
-      }
-
     }
   }
 
-  // @ Check for each slot if timer allows the next shot
-  private bool CanShoot (EquipmentSlotType weaponSlot)
+  private void AddWeaponIfExists (EquipmentSlotType slotType)
   {
-    if (weaponTimers.Count <= 0)
-    {
-      return true;
-    }
+    ScriptableItem item = equipmentManager.GetEquippedItem(slotType);
 
-    foreach (WeaponTimer weaponTimer in weaponTimers)
+    if (item is ScriptableWeapon)
     {
-      if (weaponTimer.equipmentSlot == weaponSlot)
-      {
-        return (bool)(weaponTimer.timer != null && weaponTimer.timer.HasFinished());
-      }
-    }
-
-    // If we don't find a timer match, allow shooting
-    return true;
-  }
-
-  private void HandleTimers ()
-  {
-    if (weaponTimers.Count > 0)
-    {
-      foreach (WeaponTimer weaponTimer in weaponTimers)
-      {
-        if (weaponTimer.timer != null)
-        {
-          // If timer has finished, remove it
-          if (weaponTimer.timer.HasFinished())
-          {
-            weaponTimers.Remove(weaponTimer);
-            break;
-          }
-          else
-          {
-            // Else, increment it until it finishes
-            weaponTimer.timer.Increment();
-          }
-        }
-      }
+      weapons.Add(new Weapon(
+        this.gameObject,
+        (ScriptableWeapon)item,
+        equipmentManager.GetEquippedItemGameObject(slotType)
+      ));
     }
   }
-
 }

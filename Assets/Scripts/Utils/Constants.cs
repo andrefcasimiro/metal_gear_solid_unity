@@ -24,6 +24,7 @@ public class Constants : MonoBehaviour
   public const string PRONE = "Prone";
   public const string INVENTORY = "Inventory";
   public const string FIRE = "Fire1";
+  public const string RELOAD = "Reload";
 
   // Animator Parameters
   public const string IS_RUNNING = "IsRunning";
