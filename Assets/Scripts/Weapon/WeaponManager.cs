@@ -27,12 +27,13 @@ public class WeaponManager : MonoBehaviour {
   // If we want dual wielding, we should make timer a list so we don't override timers between weapons
   private List<WeaponTimer> weaponTimers = new List<WeaponTimer>();
 
-  private bool isDualWielding = false;
+  private GameObject bulletCount;
 
   private void Start ()
   {
     equipmentManager = GetComponent<EquipmentManager>();
     gameController = GameObject.FindWithTag(Constants.GAME_CONTROLLER).GetComponent<GameController>();
+    bulletCount = GameObject.FindWithTag(Constants.UI_BULLET_COUNT);
   }
 
   private void Update ()
@@ -55,11 +56,10 @@ public class WeaponManager : MonoBehaviour {
       // Left Hand Weapon Handler
       if (
         leftHandWeapon != null
-        && leftHandWeapon.weaponType != null
         && CanShoot(EquipmentSlotType.Left_Hand)
       )
       {
-        leftHandWeapon.Shoot(this.gameObject);
+        leftHandWeapon.Shoot(this.gameObject, bulletCount);
 
         Timer timer = new Timer(leftHandWeapon.fireRate);
         WeaponTimer weaponTimer = new WeaponTimer(EquipmentSlotType.Left_Hand, timer);
@@ -69,11 +69,10 @@ public class WeaponManager : MonoBehaviour {
       // Right Hand Weapon Handler
       if (
         rightHandWeapon != null
-        && rightHandWeapon.weaponType != null
         && CanShoot(EquipmentSlotType.Right_Hand)
       )
       {
-        rightHandWeapon.Shoot(this.gameObject);
+        rightHandWeapon.Shoot(this.gameObject, bulletCount);
 
         Timer timer = new Timer(rightHandWeapon.fireRate);
         WeaponTimer weaponTimer = new WeaponTimer(EquipmentSlotType.Right_Hand, timer);

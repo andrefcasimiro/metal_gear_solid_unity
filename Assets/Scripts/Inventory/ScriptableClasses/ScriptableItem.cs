@@ -4,8 +4,8 @@
 public class ScriptableItem : ScriptableObject {
 
   new public string name = "New item";
-  public Sprite icon = null;
-  public bool isDefault = false;
+  public Sprite icon;
+  public bool isDefault;
   public ItemType itemType = ItemType.CONSUMABLE;
 
   [Header("Slot")]

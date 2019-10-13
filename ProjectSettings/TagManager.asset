@@ -10,6 +10,7 @@ TagManager:
   - UI_Inventory_Equipped
   - UI_Inventory_Stack
   - UI_Inventory_Image
+  - UI_Bullet_Count
   layers:
   - Default
   - TransparentFX

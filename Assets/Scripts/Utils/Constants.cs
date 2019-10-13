@@ -14,6 +14,7 @@ public class Constants : MonoBehaviour
   public const string UI_INVENTORY_EQUIPPED = "UI_Inventory_Equipped";
   public const string UI_INVENTORY_STACK = "UI_Inventory_Stack";
   public const string UI_INVENTORY_IMAGE = "UI_Inventory_Image";
+  public const string UI_BULLET_COUNT = "UI_Bullet_Count";
 
   // Input
   public const string VERTICAL = "Vertical";

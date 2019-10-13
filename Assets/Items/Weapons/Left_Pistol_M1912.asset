@@ -17,6 +17,7 @@ MonoBehaviour:
   isDefault: 0
   itemType: 1
   slot: 0
+  stackable: 0
   graphic: {fileID: 3417228037889323081, guid: 6459faf89ff2949289976705803a167f, type: 3}
   instantiatedPosition: {x: -0.086, y: -0.0305, z: -0.021}
   instantiatedRotation: {x: -22.328, y: -66.137, z: -131.019, w: 0}
@@ -28,5 +29,5 @@ MonoBehaviour:
   bullet: {fileID: 11400000, guid: 75e28628705454d9da1a370409b4e227, type: 2}
   magazineCapacity: 12
   fireSFX: {fileID: 8300000, guid: c1324eabd32a84441a36f18aa15c47d6, type: 3}
-  emptySFX: {fileID: 0}
+  emptySFX: {fileID: 8300000, guid: ceec860e2e7704b5698344a7ebd96575, type: 3}
   reloadSFX: {fileID: 0}

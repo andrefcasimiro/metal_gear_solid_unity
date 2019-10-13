@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour {
 
   private void Awake ()
   {
-    inventory = new Inventory(this.gameObject);
+    inventory = new Inventory();
 
     // Don't show inventory ui on awake
     inventoryUI.SetActive(false);

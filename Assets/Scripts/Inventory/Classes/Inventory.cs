@@ -6,12 +6,6 @@ using System.Collections.Generic;
 public class Inventory {
 
   private List<ScriptableItem> items = new List<ScriptableItem>();
-  private GameObject m_owner;
-
-  public Inventory (GameObject owner)
-  {
-    this.m_owner = owner;
-  }
 
   public void Add (ScriptableItem item)
   {
@@ -21,6 +15,11 @@ public class Inventory {
   public void Remove (ScriptableItem item)
   {
     items.Remove(item);
+  }
+
+  public int GetQuantity (ScriptableItem item)
+  {
+    return items.FindAll(entry => entry.name == item.name).Count;
   }
 
   public List<ScriptableItem> ListAll ()
