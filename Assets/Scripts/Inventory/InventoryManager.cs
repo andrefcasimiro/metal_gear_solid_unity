@@ -15,7 +15,7 @@ public class InventoryManager : MonoBehaviour {
 
   private GameController gameController;
   private EquipmentManager equipmentManager;
-  private bool isActive = false;
+  private bool isActive;
 
   private void Awake ()
   {
@@ -66,18 +66,29 @@ public class InventoryManager : MonoBehaviour {
     foreach (ScriptableItem item in inventoryItems)
     {
       GameObject itemButton = Instantiate(itemButtonPrefab);
-      itemButton.transform.GetChild(0).GetComponent<Image>().sprite = item.icon;
+
+      GameObject sprite = FindNestedGameObjectByTag(itemButton, Constants.UI_INVENTORY_IMAGE);
+      if (sprite != null)
+      {
+        sprite.GetComponent<Image>().sprite = item.icon;
+      }
+
       itemButton.transform.SetParent(panel.transform);
 
       // @ Equippable Item
-      if (item.slot != null && item.graphic != null)
+      if (item.graphic != null)
       {
         // @ If item is already equipped, show Equipped banner
         ScriptableItem equippedItem = equipmentManager.GetEquippedItem(item.slot);
 
+        GameObject equippedBanner = FindNestedGameObjectByTag(itemButton, Constants.UI_INVENTORY_EQUIPPED);
+        equippedBanner.SetActive(false);
+
         if (equippedItem == item)
         {
-          itemButton.GetComponent<EquippedBanner>().Display();
+          // Search for the Equipped Banner and activate it
+          equippedBanner?.SetActive(true);
+
         }
 
         itemButton.GetComponent<Button>().onClick.AddListener(() => {
@@ -86,18 +97,33 @@ public class InventoryManager : MonoBehaviour {
           if (equippedItem == item)
           {
             equipmentManager.Unequip(item.slot);
-            itemButton.GetComponent<EquippedBanner>().Hide();
+            equippedBanner?.SetActive(false);
           }
           else
           {
             equipmentManager.Equip(item.slot, item);
-            itemButton.GetComponent<EquippedBanner>().Display();
+            equippedBanner?.SetActive(true);
           }
 
+          // Redraw
           Draw();
+
         });
       }
     }
+  }
+
+  private GameObject FindNestedGameObjectByTag (GameObject parent, string _tag)
+  {
+    foreach (Transform child in parent.transform)
+    {
+      if (child.gameObject.tag == _tag)
+      {
+        return child.gameObject;
+      }
+    }
+
+    return null;
   }
 
 }

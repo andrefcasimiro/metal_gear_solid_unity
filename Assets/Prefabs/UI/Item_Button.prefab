@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1131545890}
   m_Layer: 5
   m_Name: Equipped
-  m_TagString: Untagged
+  m_TagString: UI_Inventory_Equipped
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,7 +163,6 @@ GameObject:
   - component: {fileID: 7528663583276119694}
   - component: {fileID: 7528663583276119695}
   - component: {fileID: 7528663583276119688}
-  - component: {fileID: 1672123833}
   - component: {fileID: 1672123834}
   m_Layer: 5
   m_Name: Item_Button
@@ -272,19 +271,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1672123833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7528663583276119690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3336175abdde4a32b277c97a6de098b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  banner: {fileID: 1131545888}
 --- !u!114 &1672123834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +299,7 @@ GameObject:
   - component: {fileID: 7528663583292658365}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: UI_Inventory_Image
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

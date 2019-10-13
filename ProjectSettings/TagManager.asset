@@ -7,6 +7,9 @@ TagManager:
   - FootstepManager
   - AudioManager
   - Muzzleflash
+  - UI_Inventory_Equipped
+  - UI_Inventory_Stack
+  - UI_Inventory_Image
   layers:
   - Default
   - TransparentFX
