@@ -11,6 +11,9 @@ public class ScriptableItem : ScriptableObject {
   [Header("Slot")]
   public EquipmentSlotType slot;
 
+  [Header("Stack Options")]
+  public bool stackable;
+
   [Header("Graphic")]
   public GameObject graphic;
 

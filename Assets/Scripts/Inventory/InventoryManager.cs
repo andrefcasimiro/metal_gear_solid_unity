@@ -63,19 +63,47 @@ public class InventoryManager : MonoBehaviour {
     // Store reference for performance
     List<ScriptableItem> inventoryItems = inventory.ListAll();
 
+    List<ScriptableItem> visited = new List<ScriptableItem>();
+    List<GameObject> visitedButtons = new List<GameObject>();
+
     foreach (ScriptableItem item in inventoryItems)
     {
-      GameObject itemButton = Instantiate(itemButtonPrefab);
+      GameObject itemButton = null;
 
+      int visitedIndex = item.stackable ? visited.FindIndex(entry => entry.name == item.name) : -1;
+
+      // Check if visited contains this item
+      if (visitedIndex != -1)
+      {
+        GameObject stackCounter = FindNestedGameObjectByTag(visitedButtons[visitedIndex], Constants.UI_INVENTORY_STACK);
+        itemButton = visitedButtons[visitedIndex];
+
+        // Count all existing items so far
+        int count = inventoryItems.FindAll(inventoryItem => inventoryItem.name == visited[visitedIndex].name).Count;
+
+        stackCounter.GetComponent<Text>().text = "x"+count;
+      }
+      else
+      {
+        // Register item in visited list for stackable cases
+        visited.Add(item);
+
+        // Instantiate Item Button
+        itemButton = Instantiate(itemButtonPrefab);
+        visitedButtons.Add(itemButton);
+      }
+
+      // Icon imagery logic
       GameObject sprite = FindNestedGameObjectByTag(itemButton, Constants.UI_INVENTORY_IMAGE);
       if (sprite != null)
       {
         sprite.GetComponent<Image>().sprite = item.icon;
       }
 
+      // Parent item button to panel
       itemButton.transform.SetParent(panel.transform);
 
-      // @ Equippable Item
+      // @ Equippable Item Logic
       if (item.graphic != null)
       {
         // @ If item is already equipped, show Equipped banner

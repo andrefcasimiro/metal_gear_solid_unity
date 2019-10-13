@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdcc80b8fabe348f0a3de605c3f40b66, type: 3}
   m_Name: Bullet_Pistol
   m_EditorClassIdentifier: 
-  name: New item
+  name: 9MM
   icon: {fileID: 21300000, guid: 02aed6304b8624164b2d38f73515cc5d, type: 3}
   isDefault: 0
+  itemType: 0
+  slot: 0
+  stackable: 1
+  graphic: {fileID: 0}
+  instantiatedPosition: {x: 0, y: 0, z: 0}
+  instantiatedRotation: {x: 0, y: 0, z: 0, w: 0}
+  instantiatedScale: {x: 0, y: 0, z: 0}
   type: 0
