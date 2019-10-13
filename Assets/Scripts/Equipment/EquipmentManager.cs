@@ -1,4 +1,17 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class Slot {
+  public EquipmentSlotType type;
+  public EquipmentSlot equipmentSlot;
+
+  public Slot (EquipmentSlotType _type, EquipmentSlot _equipmentSlot)
+  {
+    this.type = _type;
+    this.equipmentSlot = _equipmentSlot;
+  }
+}
 
 public class EquipmentManager : MonoBehaviour {
 
@@ -6,80 +19,55 @@ public class EquipmentManager : MonoBehaviour {
   public Transform leftHand;
   public Transform rightHand;
 
-  private EquipmentSlot leftHandEquipmentSlot;
-  private EquipmentSlot rightHandEquipmentSlot;
+  private readonly List<Slot> slots = new List<Slot>();
 
   void Awake ()
   {
-    leftHandEquipmentSlot = new EquipmentSlot(EquipmentSlotType.Left_Hand, leftHand, this.gameObject);
-    rightHandEquipmentSlot = new EquipmentSlot(EquipmentSlotType.Right_Hand, rightHand, this.gameObject);
+    EquipmentSlot leftHandEquipmentSlot = new EquipmentSlot(EquipmentSlotType.Left_Hand, leftHand, this.gameObject);
+    EquipmentSlot rightHandEquipmentSlot = new EquipmentSlot(EquipmentSlotType.Right_Hand, rightHand, this.gameObject);
+
+    // List
+    Slot leftHandSlot = new Slot(EquipmentSlotType.Left_Hand, leftHandEquipmentSlot);
+    Slot rightHandSlot = new Slot(EquipmentSlotType.Right_Hand, rightHandEquipmentSlot);
+
+    slots.Add(leftHandSlot);
+    slots.Add(rightHandSlot);
   }
 
   public void Equip (EquipmentSlotType slotType, ScriptableItem itemToEquip)
   {
-    if (IsLeftHand(slotType))
-    {
-      leftHandEquipmentSlot.Equip(itemToEquip);
-    }
-
-    if (IsRightHand(slotType))
-    {
-      rightHandEquipmentSlot.Equip(itemToEquip);
-    }
-
+    GetSlot(slotType).equipmentSlot.Equip(itemToEquip);
+    
     // Animator Updates
     GetComponent<Animator>().SetBool(Constants.IS_DUAL_WIELDING, IsDualWielding());
   }
 
   public void Unequip (EquipmentSlotType slotType)
   {
-    if (IsLeftHand(slotType))
-    {
-      leftHandEquipmentSlot.Unequip();
-    }
-
-    if (IsRightHand(slotType))
-    {
-      rightHandEquipmentSlot.Unequip();
-    }
-
+    GetSlot(slotType).equipmentSlot.Unequip();
+  
     // Animator Updates
     GetComponent<Animator>().SetBool(Constants.IS_DUAL_WIELDING, IsDualWielding());
   }
 
   public ScriptableItem GetEquippedItem (EquipmentSlotType slotType) {
-    if (IsLeftHand(slotType))
-    {
-      return leftHandEquipmentSlot.GetEquippedItem();
-    }
-
-    if (IsRightHand(slotType))
-    {
-      return rightHandEquipmentSlot.GetEquippedItem();
-    }
-
-    return null;
+    return GetSlot(slotType).equipmentSlot.GetEquippedItem();
   }
 
   public GameObject GetEquippedItemGameObject (EquipmentSlotType slotType) {
-    if (IsLeftHand(slotType))
-    {
-      return leftHandEquipmentSlot.GetEquippedItemGameObject();
-    }
+    return GetSlot(slotType).equipmentSlot.GetEquippedItemGameObject();
+  }
 
-    if (IsRightHand(slotType))
+  public Slot GetSlot (EquipmentSlotType slotType)
+  {
+    Slot slot = slots.Find(entry => entry.type == slotType);
+
+    if (slot != null)
     {
-      return rightHandEquipmentSlot.GetEquippedItemGameObject();
+      return slot;
     }
 
     return null;
-  }
-
-  private bool IsLeftHand (EquipmentSlotType slotType) {
-    return slotType.ToString() == Constants.LEFT_HAND;
-  }
-  private bool IsRightHand (EquipmentSlotType slotType) {
-    return slotType.ToString() == Constants.RIGHT_HAND;
   }
 
   private bool IsDualWielding ()

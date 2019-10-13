@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8b650725ed744dc9a2c199312a2a297, type: 3}
-  m_Name: Pistol_M1911
+  m_Name: Right_Pistol_M1911
   m_EditorClassIdentifier: 
   name: M1911
   icon: {fileID: 21300000, guid: 1f4f9b4cad916405a870ca73a72dccc3, type: 3}
