@@ -21,8 +21,12 @@ public class ScriptableWeapon : ScriptableItem {
   public AudioClip emptySFX;
   public AudioClip reloadSFX;
 
+  [Header("Reload")]
+  public bool autoReload;
+
   // Private variables
-  private int bulletsFired;
+  private int bulletsFired = -1;
+  private int totalBulletsAmount = -1;
 
   public void Reload (GameObject owner)
   {
@@ -38,10 +42,13 @@ public class ScriptableWeapon : ScriptableItem {
     if (currentTotalBullets >= magazineCapacity)
     {
       bulletsFired = 0;
+      totalBulletsAmount = currentTotalBullets - magazineCapacity;
     }
     else
     {
+      // No magazines left
       bulletsFired = magazineCapacity - currentTotalBullets;
+      totalBulletsAmount = 0;
     }
   }
 
@@ -59,8 +66,10 @@ public class ScriptableWeapon : ScriptableItem {
       audioSource.Play();
 
       // Reload Automatically
-      Reload(owner);
-
+      if (autoReload)
+      {
+        Reload(owner);
+      }
 
       return;
     }
@@ -71,9 +80,6 @@ public class ScriptableWeapon : ScriptableItem {
       bulletsFired++;
     }
 
-    // Update UI
-    DrawBulletCount(bulletCountUI, inventory.GetQuantity(bullet));
-
     audioSource.clip = fireSFX;
     audioSource.Play();
 
@@ -81,7 +87,7 @@ public class ScriptableWeapon : ScriptableItem {
     owner.GetComponent<Animator>().SetTrigger(Constants.SHOOT);
 
     // We need to obtain the instance of the gun graphic
-    GameObject weaponGraphic = owner.GetComponent<EquipmentManager>().GetEquippedItemGameObject(this.slot);
+    GameObject weaponGraphic = GetWeaponInstance(owner);
 
     // Play muzzleflash fx if it exists
     foreach (Transform child in weaponGraphic.transform)
@@ -105,23 +111,76 @@ public class ScriptableWeapon : ScriptableItem {
       GameObject target = hit.transform.gameObject;
 
     }
-
   }
 
-  public void DrawBulletCount (GameObject bulletCountUI, int currentBulletAmount)
+  public void DrawBulletCount (GameObject owner)
   {
-    // @ UI Bullet Counting Logic
-    Text bulletCounterText = bulletCountUI.GetComponent<Text>();
+    GameObject weaponGraphic = GetWeaponInstance(owner);
+    Text bulletCounterText = null;
 
-    if (currentBulletAmount <= magazineCapacity)
+    // Play muzzleflash fx if it exists
+    foreach (Transform child in weaponGraphic.transform)
     {
-      currentBulletAmount = 0;
+      if (child.gameObject.tag == Constants.UI_BULLET_COUNT)
+      {
+        bulletCounterText = child.transform.GetChild(0).gameObject.GetComponent<Text>();
+      }
     }
 
-    bulletCounterText.text = (magazineCapacity - bulletsFired).ToString() + "/" + currentBulletAmount;
+    // @ UI Bullet Counting Logic
+    if (bulletCounterText != null)
+    {
+      if (bulletsFired == -1)
+      {
+        bulletsFired = magazineCapacity;
+      }
+
+      DrawText(owner, bulletCounterText);
+    }
+    else
+    {
+      Debug.Log("Could not find a bullet counter text in the weapon graphic");
+    }
   }
 
+  public void DrawText (GameObject owner, Text bulletCounterText)
+  {
+    Inventory inventory = owner.GetComponent<InventoryManager>().inventory;
+    int currentTotalBullets = inventory.GetQuantity(bullet);
 
+    int current;
+    int total;
+
+    // @ Initial case when we might not even have bullets
+    if (bulletsFired == -1 && totalBulletsAmount == -1)
+    {
+      if (currentTotalBullets >= magazineCapacity)
+      {
+        current = magazineCapacity;
+        total = currentTotalBullets - magazineCapacity;
+      }
+      else
+      {
+        current = currentTotalBullets;
+        total = 0;
+      }
+    }
+    else
+    {
+      current = magazineCapacity - bulletsFired;
+      total = currentTotalBullets - magazineCapacity;
+    }
+
+
+    bulletCounterText.text = current + "/" + total;
+  }
+
+  private GameObject GetWeaponInstance (GameObject owner)
+  {
+    GameObject weaponGraphic = owner.GetComponent<EquipmentManager>().GetEquippedItemGameObject(this.slot);
+
+    return weaponGraphic;
+  }
 }
 
 public enum WeaponType { None, Pistol, Rifle, Sniper, Shotgun, Missile_Launcher, Melee }

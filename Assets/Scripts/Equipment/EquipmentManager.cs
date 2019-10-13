@@ -21,6 +21,7 @@ public class EquipmentManager : MonoBehaviour {
 
   private readonly List<Slot> slots = new List<Slot>();
 
+
   void Awake ()
   {
     EquipmentSlot leftHandEquipmentSlot = new EquipmentSlot(EquipmentSlotType.Left_Hand, leftHand, this.gameObject);
@@ -44,7 +45,9 @@ public class EquipmentManager : MonoBehaviour {
 
   public void Unequip (EquipmentSlotType slotType)
   {
-    GetSlot(slotType).equipmentSlot.Unequip();
+    EquipmentSlot slot = GetSlot(slotType).equipmentSlot;
+
+    slot.Unequip();
   
     // Animator Updates
     GetComponent<Animator>().SetBool(Constants.IS_DUAL_WIELDING, IsDualWielding());

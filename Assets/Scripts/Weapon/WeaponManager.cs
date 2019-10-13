@@ -27,19 +27,26 @@ public class WeaponManager : MonoBehaviour {
   // If we want dual wielding, we should make timer a list so we don't override timers between weapons
   private List<WeaponTimer> weaponTimers = new List<WeaponTimer>();
 
-  private GameObject bulletCount;
+  private GameObject bulletCountUI;
 
   private void Start ()
   {
     equipmentManager = GetComponent<EquipmentManager>();
     gameController = GameObject.FindWithTag(Constants.GAME_CONTROLLER).GetComponent<GameController>();
-    bulletCount = GameObject.FindWithTag(Constants.UI_BULLET_COUNT);
+    bulletCountUI = GameObject.FindWithTag(Constants.UI_BULLET_COUNT);
   }
 
   private void Update ()
   {
 
     HandleTimers();
+
+    // @Any weapons equipped?
+    leftHandWeapon = (ScriptableWeapon)equipmentManager.GetEquippedItem(EquipmentSlotType.Left_Hand);
+    rightHandWeapon = (ScriptableWeapon)equipmentManager.GetEquippedItem(EquipmentSlotType.Right_Hand);
+
+    leftHandWeapon?.DrawBulletCount(this.gameObject);
+    rightHandWeapon?.DrawBulletCount(this.gameObject);
 
     // Try firing
     if (Input.GetButton(Constants.FIRE))
@@ -49,17 +56,10 @@ public class WeaponManager : MonoBehaviour {
         return;
       }
 
-      // @Any weapons equipped?
-      leftHandWeapon = (ScriptableWeapon)equipmentManager.GetEquippedItem(EquipmentSlotType.Left_Hand);
-      rightHandWeapon = (ScriptableWeapon)equipmentManager.GetEquippedItem(EquipmentSlotType.Right_Hand);
-
       // Left Hand Weapon Handler
-      if (
-        leftHandWeapon != null
-        && CanShoot(EquipmentSlotType.Left_Hand)
-      )
+      if (leftHandWeapon != null && CanShoot(EquipmentSlotType.Left_Hand))
       {
-        leftHandWeapon.Shoot(this.gameObject, bulletCount);
+        leftHandWeapon.Shoot(this.gameObject, bulletCountUI);
 
         Timer timer = new Timer(leftHandWeapon.fireRate);
         WeaponTimer weaponTimer = new WeaponTimer(EquipmentSlotType.Left_Hand, timer);
@@ -67,12 +67,9 @@ public class WeaponManager : MonoBehaviour {
       }
 
       // Right Hand Weapon Handler
-      if (
-        rightHandWeapon != null
-        && CanShoot(EquipmentSlotType.Right_Hand)
-      )
+      if (rightHandWeapon != null && CanShoot(EquipmentSlotType.Right_Hand))
       {
-        rightHandWeapon.Shoot(this.gameObject, bulletCount);
+        rightHandWeapon.Shoot(this.gameObject, bulletCountUI);
 
         Timer timer = new Timer(rightHandWeapon.fireRate);
         WeaponTimer weaponTimer = new WeaponTimer(EquipmentSlotType.Right_Hand, timer);
