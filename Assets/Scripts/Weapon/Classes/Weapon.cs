@@ -16,8 +16,6 @@ public class Weapon : MonoBehaviour
   private Inventory inventory;
   private Animator animator;
 
-  private float characterHeight = 1f;
-
   private int bulletsFired;
   private bool hasReloadedOnce;
 
@@ -98,8 +96,8 @@ public class Weapon : MonoBehaviour
 
   private void DispatchRaycast ()
   {
-    Vector3 origin = new Vector3(m_owner.transform.position.x, m_owner.transform.position.y + characterHeight, m_owner.transform.position.z);
-    Vector3 destination = m_owner.transform.forward;
+    Vector3 origin = m_weaponGameObject.transform.position;
+    Vector3 destination = m_weaponGameObject.transform.forward;
 
     RaycastHit hit;
     if (Physics.Raycast(origin, destination, out hit, m_scriptableWeapon.range))
