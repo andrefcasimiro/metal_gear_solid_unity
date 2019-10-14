@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: 96bc3943db8730747845802a4c3df770
+timeCreated: 1510838877
+licenseType: Store
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: a_low
+    100002: b_low
+    100004: c_low
+    100006: d_low
+    100008: e_low
+    100010: f_low
+    100012: g_low
+    100014: h_low
+    100016: i_low
+    100018: j_low
+    100020: k_low
+    100022: m_low
+    100024: //RootNode
+    100026: n_low
+    100028: o_low
+    100030: p_low
+    100032: q_low
+    100034: r_low
+    100036: s_low
+    100038: t_low
+    100040: u_low
+    100042: v_low
+    100044: w_low
+    100046: x_low
+    100048: y_low
+    400000: a_low
+    400002: b_low
+    400004: c_low
+    400006: d_low
+    400008: e_low
+    400010: f_low
+    400012: g_low
+    400014: h_low
+    400016: i_low
+    400018: j_low
+    400020: k_low
+    400022: m_low
+    400024: //RootNode
+    400026: n_low
+    400028: o_low
+    400030: p_low
+    400032: q_low
+    400034: r_low
+    400036: s_low
+    400038: t_low
+    400040: u_low
+    400042: v_low
+    400044: w_low
+    400046: x_low
+    400048: y_low
+    2300000: a_low
+    2300002: b_low
+    2300004: c_low
+    2300006: d_low
+    2300008: e_low
+    2300010: f_low
+    2300012: g_low
+    2300014: h_low
+    2300016: i_low
+    2300018: j_low
+    2300020: k_low
+    2300022: m_low
+    2300024: n_low
+    2300026: o_low
+    2300028: p_low
+    2300030: q_low
+    2300032: r_low
+    2300034: s_low
+    2300036: t_low
+    2300038: u_low
+    2300040: v_low
+    2300042: w_low
+    2300044: x_low
+    2300046: y_low
+    3300000: a_low
+    3300002: b_low
+    3300004: c_low
+    3300006: d_low
+    3300008: e_low
+    3300010: f_low
+    3300012: g_low
+    3300014: h_low
+    3300016: i_low
+    3300018: j_low
+    3300020: k_low
+    3300022: m_low
+    3300024: n_low
+    3300026: o_low
+    3300028: p_low
+    3300030: q_low
+    3300032: r_low
+    3300034: s_low
+    3300036: t_low
+    3300038: u_low
+    3300040: v_low
+    3300042: w_low
+    3300044: x_low
+    3300046: y_low
+    4300000: a_low
+    4300002: p_low
+    4300004: f_low
+    4300006: n_low
+    4300008: o_low
+    4300010: v_low
+    4300012: g_low
+    4300014: x_low
+    4300016: m_low
+    4300018: w_low
+    4300020: k_low
+    4300022: c_low
+    4300024: s_low
+    4300026: t_low
+    4300028: u_low
+    4300030: d_low
+    4300032: j_low
+    4300034: i_low
+    4300036: h_low
+    4300038: q_low
+    4300040: r_low
+    4300042: y_low
+    4300044: e_low
+    4300046: b_low
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dark
+    second: {fileID: 2100000, guid: ab4aadfe2bf8ae749ad66670babd2522, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

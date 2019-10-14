@@ -18,7 +18,7 @@ MonoBehaviour:
   itemType: 1
   slot: 0
   stackable: 0
-  graphic: {fileID: 3417228037889323081, guid: 6459faf89ff2949289976705803a167f, type: 3}
+  graphic: {fileID: 3417228037889323081, guid: 07a6fe05e79664b6fbe9a7d30cd61f4e, type: 3}
   instantiatedPosition: {x: -0.086, y: -0.0305, z: -0.021}
   instantiatedRotation: {x: -22.328, y: -66.137, z: -131.019, w: 0}
   instantiatedScale: {x: 0.28695, y: 0.28695, z: 0.28695}

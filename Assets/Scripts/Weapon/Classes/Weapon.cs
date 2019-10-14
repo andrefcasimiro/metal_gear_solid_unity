@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour
     this.m_weaponGameObject = weaponGameObject;
 
     // @ Assign needed components
-    audioSource = this.m_owner.GetComponent<AudioSource>();
+    audioSource = this.m_weaponGameObject.GetComponent<AudioSource>();
     inventory = this.m_owner.GetComponent<InventoryManager>().inventory;
     animator = this.m_owner.GetComponent<Animator>();
   }
@@ -143,11 +143,6 @@ public class Weapon : MonoBehaviour
     }
 
     int bulletsInTheChamber = m_scriptableWeapon.magazineCapacity - bulletsFired;
-
-    Debug.Log("bullets_amount: " + bulletsAmount + " is bigger than " + m_scriptableWeapon.magazineCapacity + "?");
-    Debug.Log(bulletsAmount >= m_scriptableWeapon.magazineCapacity);
-
-    Debug.Log("Then, the bullets fired should start at: " + (bulletsInTheChamber + bulletsAmount));
 
     bulletsFired = bulletsAmount + bulletsInTheChamber >= m_scriptableWeapon.magazineCapacity
       ? 0
